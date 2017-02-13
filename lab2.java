@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 //Ashley Ritter and Ben Bachmen
 //parking lot model
 //CMPT440 lab2
-=======
->>>>>>> 0ae3cd6cc748c8a579b7b939b20d9123cf1471cc
-
 import java.util.*;
 import java.io.*;
 
@@ -57,8 +53,6 @@ public class lab2{
 		catch (IOException e){
 			e.printStackTrace();
 		}
-<<<<<<< HEAD
-
 		System.out.println("res: "+rez+" commuters: "+commuters+" spots: "+spots);
 
 		//time management
@@ -68,11 +62,3 @@ public class lab2{
 
 	
 }
-=======
-		
-		System.out.println("res: "+rez+" commuters: "+commuters+" spots: "+spots);
-	}
-
-	
-}
->>>>>>> 0ae3cd6cc748c8a579b7b939b20d9123cf1471cc
