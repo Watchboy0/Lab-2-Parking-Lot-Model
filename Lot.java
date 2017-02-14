@@ -3,12 +3,12 @@ import java.util.*;
 public class Lot
 {
 	private int numSpots; // 215
-	private Object[] parkingSpots; // studentCar
+	private studentCar[] parkingSpots;
 
 	public Lot(int numSpots)
 	{
 		this.numSpots = numSpots;
-		this.parkingSpots = new Object[numSpots]; // studentCar
+		this.parkingSpots = new studentCar[numSpots];
 	}
 
 	public int getNumSpots()
@@ -31,14 +31,14 @@ public class Lot
 	}
 
 	// Checks if any cars would have left before the specified time and removes them
-	public void update(int time)
+	public void update(Date currentTime)
 	{
 		for (int i = 0; i < parkingSpots.length; i++)
 		{
-			// if (parkingSpots[i].getLeaveTime() < time) // current time is after leaving time of car
-			// {
-			// 	parkingSpots[i] = null;
-			// }
+			if (parkingSpots[i].getDeparture().before(currentTime)) // current time is after leaving time of car
+			{
+				parkingSpots[i] = null;
+			}
 		}
 	}
 
@@ -54,9 +54,9 @@ public class Lot
 		return -1;
 	}
 
-	public boolean addCar(Object car, int time) // studentCar
+	public boolean addCar(studentCar car, Date currentTime)
 	{
-		this.update(time);
+		this.update(currentTime);
 		if (this.getRemainingSpots() == 0)
 		{
 			return false;

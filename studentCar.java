@@ -5,12 +5,20 @@
 import java.util.*;
 
 public class studentCar{
-	String type = "";
-	Date arrival;
-	Date departure;
+	private String type = "";
+	private Date arrival;
+	private Date departure;
 
 	studentCar(String type){
 		this.type=type;
+	}
+
+	public Date getArrival(){
+		return arrival;
+	}
+
+	public Date getDeparture(){
+		return departure;
 	}
 
 }
