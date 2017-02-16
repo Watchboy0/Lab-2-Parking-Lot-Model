@@ -16,6 +16,7 @@ public class Lot
 		return numSpots;
 	}
 
+	// Finds the number of empty spots in the lot
 	public int getRemainingSpots()
 	{
 		int remainingSpots = 0;
@@ -42,6 +43,8 @@ public class Lot
 		}
 	}
 
+	// Returns the index of the first empty spot found in the array
+	// returns -1 if no spots found
 	public int findEmptySpot()
 	{
 		for (int i = 0; i < parkingSpots.length; i++)
@@ -54,13 +57,18 @@ public class Lot
 		return -1;
 	}
 
+	// 
 	public boolean addCar(studentCar car, Date currentTime)
 	{
+		// Checks if any cars would have left and removes them
 		this.update(currentTime);
+		
+		// Returns false if no available spaces
 		if (this.getRemainingSpots() == 0)
 		{
 			return false;
 		}
+		// If spot is found, adds car to array and returns true
 		else
 		{
 			parkingSpots[findEmptySpot()] = car;
