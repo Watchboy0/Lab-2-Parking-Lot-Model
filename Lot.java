@@ -67,4 +67,12 @@ public class Lot
 			return true;
 		}
 	}
+
+	public String toString()
+	{
+		String returnString = ""+getRemainingSpots();
+		returnString += " out of "+numSpots+" spots available";
+
+		return returnString;
+	}
 }
