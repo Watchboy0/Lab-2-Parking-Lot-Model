@@ -31,12 +31,27 @@ public class Lot
 		return remainingSpots;
 	}
 
+	// Finds the number of taken spots in the lot
+	public int getNumCars()
+	{
+		int numCars = 0;
+		// Iterates over array, looking for null spaces
+		for (int i = 0; i < parkingSpots.length; i++)
+		{
+			if (parkingSpots[i] != null)
+			{
+				numCars++;
+			}
+		}
+		return numCars;
+	}	
+
 	// Checks if any cars would have left before the specified time and removes them
 	public void update(Date currentTime)
 	{
 		for (int i = 0; i < parkingSpots.length; i++)
 		{
-			if (parkingSpots[i].getDeparture().before(currentTime)) // current time is after leaving time of car
+			if (parkingSpots[i] != null && parkingSpots[i].getDeparture().before(currentTime)) // current time is after leaving time of car
 			{
 				parkingSpots[i] = null;
 			}
@@ -76,9 +91,15 @@ public class Lot
 		}
 	}
 
+	public boolean addCar(studentCar car)
+	{
+		return this.addCar(car, car.getArrival());
+	}
+
 	public String toString()
 	{
-		String returnString = ""+getRemainingSpots();
+		String returnString = ""+getNumCars()+" cars in the lot, ";
+		returnString += ""+getRemainingSpots();
 		returnString += " out of "+numSpots+" spots available";
 
 		return returnString;
