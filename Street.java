@@ -2,11 +2,13 @@ import java.util.*;
 
 public class Street
 {
-	private ArrayList<studentCar> parkingSpots;
+	// private ArrayList<studentCar> parkingSpots;
+	private ArrayList<studentCar> parkingSpots = new ArrayList<studentCar>();
+
 
 	public Street()
 	{
-		ArrayList<studentCar> parkingSpots = new ArrayList<>();
+		ArrayList<studentCar> parkingSpots = new ArrayList<studentCar>();
 	}
 
 	// Adds a car to the street and removes any cars that would have left
@@ -16,16 +18,30 @@ public class Street
 		parkingSpots.add(car);
 	}
 
+	public void addCar(studentCar car)
+	{
+		this.addCar(car, car.getArrival());
+	}
+
 	// Checks the departure time of each car with the current time and removes any that would have left
 	public void update(Date currentTime)
 	{
-		parkingSpots.forEach((car) ->
+		// parkingSpots.forEach((car) ->
+		// {
+		// 	if (car.getDeparture().before(currentTime)) // current time is after leaving time of car
+		// 	{
+		// 		parkingSpots.remove(car);
+		// 	}
+		// });
+
+		for (Iterator<studentCar> iterator = parkingSpots.iterator(); iterator.hasNext(); )
 		{
-			if (car.getDeparture().before(currentTime)) // current time is after leaving time of car
+			studentCar car = iterator.next();
+			if (car.getDeparture().before(currentTime))
 			{
-				parkingSpots.remove(car);
+				iterator.remove();
 			}
-		});
+		}
 	}
 
 	// Returns number of cars on street
@@ -43,6 +59,6 @@ public class Street
 
 	public String toString()
 	{
-		return ""+getNumCars()+" on the street";
+		return ""+getNumCars()+" cars on the street";
 	}
 }
