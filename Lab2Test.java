@@ -3,7 +3,21 @@ import java.io.*;
 
 public class Lab2Test
 {
+    public static Date nextArrival(Date prevArrival, double rand, double rate)
+    {
+        Date d = new Date();
+        long millis = prevArrival.getTime();
+        millis += (-Math.log(rand)/rate)*1000*60;
+        d.setTime(millis);
+        return d;
+    }
+
 	public static void main(String[] args)
+    {
+        Lab2Test();
+    }
+
+    public static void Lab2Test()
 	{
 		Lot lot = new Lot(215);
 		Street street = new Street();
@@ -55,5 +69,18 @@ public class Lab2Test
 
 		System.out.println(lot);
 		System.out.println(street);
+
+        Random rand = new Random();
+
+        System.out.println(startTime);
+        Date d = new Date();
+        d = nextArrival(startTime, rand.nextDouble(), 0.5);
+        System.out.println(d);
+        for(int i = 0; i < 10; i++)
+        {
+            d = nextArrival(d, rand.nextDouble(), 0.5);
+            System.out.println(d);
+        }
+        //System.out.println(nextArrival(startTime, .5, 2));
 	}
 }
