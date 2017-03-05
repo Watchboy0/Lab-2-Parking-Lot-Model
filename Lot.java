@@ -46,6 +46,12 @@ public class Lot
 		return numCars;
 	}	
 
+	public int getNumCars(Date currentTime)
+	{
+		this.update(currentTime);
+		return getNumCars();
+	}
+
 	// Checks if any cars would have left before the specified time and removes them
 	public void update(Date currentTime)
 	{
