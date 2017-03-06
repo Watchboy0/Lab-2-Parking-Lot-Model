@@ -70,6 +70,7 @@ public class lab2{
 		Date startTime = new Date(117, 1, 16, 7, 0);
 		Date endTime = new Date(117, 1, 16, 23, 59);
 		Date leavingTime = new Date(117, 1, 17, 23, 59);
+		Date afternoon = new Date(117, 1, 16, 12, 0);
 
 		Lot lot = new Lot(spots);
 		Street street = new Street();
@@ -101,10 +102,10 @@ public class lab2{
 			rand = new Random(seed);
 		}
 		Date d = new Date();
-		d = nextArrival(startTime, rand.nextDouble(), 0.25);
+		d = nextArrival(startTime, rand.nextDouble(), 0.5);
 		int count = 0;
-		////int[] a = {0,0,0,0,0,0,0,0,0,0};
-		while (d.before(endTime) && count < maxIterations)
+
+		while (d.before(endTime) && count < commuters) //maxIterations)
 		{
 			long millis = d.getTime();
 			millis += stayTimes.getStayTime()*60*60*1000; // Converts from hours to milliseconds
@@ -112,17 +113,19 @@ public class lab2{
 			leave.setTime(millis);
 
 			studentCar car = new studentCar("commuter", d, leave);
-			// System.out.println(d);
-			// System.out.println(leave);
 			if(!lot.addCar(car))
 			{
 				street.addCar(car);
 			}
-			d = nextArrival(d, rand.nextDouble(), 0.25);
+			if (d.before(afternoon))
+			{
+				d = nextArrival(d, rand.nextDouble(), .75); // 0.75 cars per minute
+			}
+			else
+			{
+				d = nextArrival(d, rand.nextDouble(), 0.25); // 0.25 cars per minute
+			}
 
-			// System.out.println(""+count+" "+d);
-			// System.out.println(lot);
-			// System.out.println(street);
 			String output = ""+count+", "+d.getHours()+":";
 			if (d.getMinutes() < 10) output += "0";
 			output += d.getMinutes()+", "+lot.getNumCars(d)+", "+street.getNumCars(d);
@@ -130,15 +133,21 @@ public class lab2{
 			System.out.println(output);
 			logger.println(output);
 
-			// System.out.println(""+count+", "+d.getHours()+":"+d.getMinutes()+", "+lot.getNumCars(d)+", "+street.getNumCars(d));
-			// logger.println(""+count+", "+d.getHours()+":"+d.getMinutes()+", "+lot.getNumCars(d)+", "+street.getNumCars(d));
-			// System.out.println(stayTimes.getStayTime());
-			////a[stayTimes.getStayTime()]++;
-
 			count++;
 		}
-		/////for (int i = 0; i < a.length; i++)
-			////System.out.println(""+i+" "+a[i]);
+		while (d.before(endTime))
+		{
+			long millis = d.getTime();
+			d.setTime(millis+(1000*60*5)); // Adds 5 minutes
+			//lot.update(d);
+
+			String output = "-1"+", "+d.getHours()+":";
+			if (d.getMinutes() < 10) output += "0";
+			output += d.getMinutes()+", "+lot.getNumCars(d)+", "+street.getNumCars(d);
+
+			System.out.println(output);
+			logger.println(output);
+		}
 
 		logger.close();
 	}
