@@ -1,0 +1,6 @@
+spots 215
+commuters 300
+
+apartment 31
+tower 44
+seed 1234
