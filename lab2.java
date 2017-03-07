@@ -65,7 +65,7 @@ public class lab2{
 
 		File log = new File("log_"+input);
 		PrintWriter logger = new PrintWriter(log);
-		logger.println("#, time, lot, street");
+		logger.println("#, time, minutes, lot, street");
 
 		Date startTime = new Date(117, 1, 16, 7, 0);
 		Date endTime = new Date(117, 1, 16, 23, 59);
@@ -128,7 +128,10 @@ public class lab2{
 
 			String output = ""+count+", "+d.getHours()+":";
 			if (d.getMinutes() < 10) output += "0";
-			output += d.getMinutes()+", "+lot.getNumCars(d)+", "+street.getNumCars(d);
+			output += d.getMinutes();
+			int numMins = (d.getHours()-startTime.getHours())*60+(d.getMinutes()-startTime.getMinutes());
+			output += ", "+numMins;
+			output += ", "+lot.getNumCars(d)+", "+street.getNumCars(d);
 			
 			System.out.println(output);
 			logger.println(output);
@@ -143,7 +146,10 @@ public class lab2{
 
 			String output = "-1"+", "+d.getHours()+":";
 			if (d.getMinutes() < 10) output += "0";
-			output += d.getMinutes()+", "+lot.getNumCars(d)+", "+street.getNumCars(d);
+			output += d.getMinutes();
+			int numMins = (d.getHours()-startTime.getHours())*60+(d.getMinutes()-startTime.getMinutes());
+			output += ", "+numMins;
+			output += ", "+lot.getNumCars(d)+", "+street.getNumCars(d);
 
 			System.out.println(output);
 			logger.println(output);
